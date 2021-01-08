@@ -39,11 +39,11 @@ while True:
     Rlon = abs((center_lon-x) * (111.320 * math.cos(y*0.01745329)))
     C = (math.sqrt(((Rlat) ** 2) + ((Rlon) ** 2)))
     if C <= R:
-        print("It's here!", "lat:" lat, "lon:" lon, "Rlat:" Rlat, "Rlon:" Rlon, "C:" C)
+        print("It's here!", "lat:", lat, "lon:", lon, "Rlat:", Rlat, "Rlon:", Rlon, "C:", C)
         api.update_status(text)
         sleep(1800)
     else:
-        print("nope", "lat:" lat, "lon:" lon, "Rlat:" Rlat, "Rlon:" Rlon, "C:" C)
+        print("nope", "lat:", lat, "lon:", lon, "Rlat:", Rlat, "Rlon:", Rlon, "C:", C)
         sleep(5)
         
 
