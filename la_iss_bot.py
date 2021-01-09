@@ -8,7 +8,7 @@ from time import sleep
 
 consumer_key = environ['consumer_key']
 consumer_secret = environ['consumer_secret']
-access_token = environ['acces_token']
+access_token = environ['access_token']
 access_secret = environ['access_secret']
 
 auth = tp.OAuthHandler(consumer_key, consumer_secret)
