@@ -8,7 +8,7 @@ from time import sleep
 
 consumer_key = environ['consumer_key']
 consumer_secret = environ['consumer_secret']
-access_token = environ['access_token']
+access_token = environ['acces_token']
 access_secret = environ['access_secret']
 
 auth = tp.OAuthHandler(consumer_key, consumer_secret)
@@ -38,14 +38,27 @@ while True:
     Rlat = abs((center_lat-y) * 110.574)
     Rlon = abs((center_lon-x) * (111.320 * math.cos(y*0.01745329)))
     C = (math.sqrt(((Rlat) ** 2) + ((Rlon) ** 2)))
-    if C <= R:
-        print("It's here!", "lat:", lat, "lon:", lon, "Rlat:", Rlat, "Rlon:", Rlon, "C:", C)
-        api.update_status(text)
-        sleep(1800)
-    else:
-        print("nope", "lat:", lat, "lon:", lon, "Rlat:", Rlat, "Rlon:", Rlon, "C:", C)
-        sleep(5)
+
+while True:
+    now_hour = int(datetime.now().strftime('%H'))
+    
+    if now_hour >= 20 and now_hour <= 23:
+        (lat, lon) = current_position('http://api.open-notify.org/iss-now.json')
+
+        Rlat = abs((center_lat-lat) * 110.574)
+        Rlon = abs((center_lon-lon) * (111.320 * math.cos(lat*0.01745329)))
+        C = (math.sqrt(((Rlat) ** 2) + ((Rlon) ** 2)))
         
+        if C <= R:
+            print("It's here!", "lat:", lat, "lon:", lon, "Rlat:", Rlat, "Rlon:", Rlon, "C:", C)
+            api.update_status(text)
+            sleep(1800)
+        else:
+            print("nope", "lat:", lat, "lon:", lon, "Rlat:", Rlat, "Rlon:", Rlon, "C:", C)
+            sleep(1)
+    else: 
+        print('not here')
+        sleep(5)
 
 
 
